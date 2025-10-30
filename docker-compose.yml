@@ -1,3 +1,5 @@
+version: "3.9"
+
 services:
   blue:
     image: ${BLUE_IMAGE}
@@ -14,6 +16,7 @@ services:
       interval: 10s
       timeout: 3s
       retries: 3
+
   green:
     image: ${GREEN_IMAGE}
     container_name: green
@@ -24,12 +27,12 @@ services:
       - RELEASE_ID=${RELEASE_ID_GREEN}
       - NODE_ENV=production
       - APP_POOL=green
-
     healthcheck:
       test: ["CMD", "curl", "-f", "http://localhost:3000/healthz"]
       interval: 10s
       timeout: 3s
       retries: 3
+
   nginx:
     image: ${NGINX_IMAGE}
     container_name: nginx
@@ -39,14 +42,30 @@ services:
       - blue
       - green
     volumes:
-      - ./nginx/template/nginx.conf:/etc/nginx/nginx.conf:ro
+      - ./nginx/template/nginx.conf.template:/etc/nginx/nginx.conf:ro
       - ./nginx/entrypoint.sh:/docker-entrypoint.d/entrypoint.sh:ro
+      - nginx_logs:/var/log/nginx
     environment:
       - ACTIVE_POOL=${ACTIVE_POOL}
       - RELEASE_ID_BLUE=${RELEASE_ID_BLUE}
       - RELEASE_ID_GREEN=${RELEASE_ID_GREEN}
     healthcheck:
-      test: ["CMD", "curl", "-f", "http://localhost/version"]
+      test: ["CMD", "curl", "-f", "http://localhost/healthz"]
       interval: 10s
       timeout: 3s
       retries: 3
+
+  alert_watcher:
+    build: ./watcher
+    volumes:
+      - nginx_logs:/var/log/nginx
+    environment:
+      - SLACK_WEBHOOK_URL=${SLACK_WEBHOOK_URL}
+      - ERROR_RATE_THRESHOLD=${ERROR_RATE_THRESHOLD}
+      - WINDOW_SIZE=${WINDOW_SIZE}
+      - ALERT_COOLDOWN_SEC=${ALERT_COOLDOWN_SEC}
+    depends_on:
+      - nginx
+
+volumes:
+  nginx_logs:

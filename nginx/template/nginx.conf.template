@@ -1,0 +1,60 @@
+worker_processes 1;
+
+events {
+    worker_connections 1024;
+}
+
+http {
+    resolver 127.0.0.11 valid=10s ipv6=off;
+
+    upstream app_primary {
+        server blue:3000 max_fails=1 fail_timeout=2s;
+        server green:3000 backup;
+        zone backend 64k;
+    }
+
+    log_format main_json escape=json
+        '{'
+          '"time_local":"$time_local",'
+          '"remote_addr":"$remote_addr",'
+          '"request":"$request",'
+          '"status":"$status",'
+          '"upstream_status":"$upstream_status",'
+          '"upstream_addr":"$upstream_addr",'
+          '"request_time":"$request_time",'
+          '"upstream_response_time":"$upstream_response_time",'
+          '"x_app_pool":"$upstream_http_x_app_pool",'
+          '"x_release_id":"$upstream_http_x_release_id"'
+        '}';
+
+    access_log /var/log/nginx/access.log main_json;
+
+    server {
+        listen 80;
+        server_name localhost;
+
+        location / {
+            proxy_connect_timeout 1s;
+            proxy_send_timeout 5s;
+            proxy_read_timeout 5s;
+
+            proxy_next_upstream error timeout http_500 http_502 http_503 http_504;
+            proxy_next_upstream_tries 2;
+
+            proxy_pass_header X-App-Pool;
+            proxy_pass_header X-Release-Id;
+
+            proxy_set_header Host $host;
+            proxy_set_header X-Real-IP $remote_addr;
+            proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
+            proxy_set_header X-Forwarded-Proto $scheme;
+
+            proxy_pass http://app_primary;
+        }
+
+        location /healthz {
+            return 200 'OK';
+            add_header Content-Type text/plain;
+        }
+    }
+}
