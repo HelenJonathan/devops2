@@ -4,15 +4,8 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="784a1f2a-357c-469b-9ec7-bc1b2b1d098d" name="Changes" comment="idealupdate">
-      <change afterPath="$PROJECT_DIR$/runbook.md" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/watcher/ watcher.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/watcher/requirements.txt" afterDir="false" />
+    <list default="true" id="784a1f2a-357c-469b-9ec7-bc1b2b1d098d" name="Changes" comment="webhook-slack">
       <change beforePath="$PROJECT_DIR$/.env.example" beforeDir="false" afterPath="$PROJECT_DIR$/.env.example" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.github/workflows/ci-cd.yml" beforeDir="false" afterPath="$PROJECT_DIR$/.github/workflows/ci-cd.yml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/docker-compose.yml" beforeDir="false" afterPath="$PROJECT_DIR$/docker-compose.yml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/nginx/template/nginx.conf" beforeDir="false" afterPath="$PROJECT_DIR$/nginx/template/nginx.conf.template" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -76,7 +69,7 @@
       <option name="presentableId" value="Default" />
       <updated>1761808701493</updated>
       <workItem from="1761808705312" duration="8504000" />
-      <workItem from="1761857538588" duration="4540000" />
+      <workItem from="1761857538588" duration="5383000" />
     </task>
     <task id="LOCAL-00001" summary="update">
       <option name="closed" value="true" />
@@ -136,6 +129,7 @@
     <MESSAGE value="update" />
     <MESSAGE value="ideal update" />
     <MESSAGE value="idealupdate" />
-    <option name="LAST_COMMIT_MESSAGE" value="idealupdate" />
+    <MESSAGE value="webhook-slack" />
+    <option name="LAST_COMMIT_MESSAGE" value="webhook-slack" />
   </component>
 </project>
