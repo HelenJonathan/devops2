@@ -9,6 +9,7 @@ services:
     environment:
       - APP_POOL=blue
       - RELEASE_ID=${RELEASE_ID_BLUE}
+      - ACTIVE_POOL=blue
     healthcheck:
       test: ["CMD", "curl", "-f", "http://localhost:3000/healthz"]
       interval: 10s
@@ -23,6 +24,7 @@ services:
     environment:
       - APP_POOL=green
       - RELEASE_ID=${RELEASE_ID_GREEN}
+      - ACTIVE_POOL=green
     healthcheck:
       test: ["CMD", "curl", "-f", "http://localhost:3000/healthz"]
       interval: 10s
@@ -30,7 +32,7 @@ services:
       retries: 3
 
   nginx:
-    image: ${NGINX_IMAGE}
+    image: nginx:1.25-alpine
     container_name: nginx
     ports:
       - "${NGINX_PORT}:80"
