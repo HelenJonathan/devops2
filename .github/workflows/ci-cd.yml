@@ -1,0 +1,21 @@
+name: CI Pipeline
+
+on:
+  push:
+    branches: [ main ]
+
+jobs:
+  build-test:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: 🧾 Checkout
+        uses: actions/checkout@v4
+
+      - name: 🐋 Set up Docker
+        uses: docker/setup-buildx-action@v3
+
+      - name: 🧱 Build and Test
+        run: |
+          chmod +x test/ci_test.sh
+          bash test/ci_test.sh
