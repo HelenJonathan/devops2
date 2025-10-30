@@ -1,6 +1,7 @@
 services:
   blue:
     image: ${BLUE_IMAGE}
+    container_name: blue
     ports:
       - "${BLUE_PORT}:3000"
     healthcheck:
@@ -10,6 +11,7 @@ services:
       retries: 3
   green:
     image: ${GREEN_IMAGE}
+    container_name: green
     ports:
       - "${GREEN_PORT}:3000"
     healthcheck:
@@ -19,6 +21,7 @@ services:
       retries: 3
   nginx:
     image: ${NGINX_IMAGE}
+    container_name: nginx
     ports:
       - "${NGINX_PORT}:80"
     depends_on:
