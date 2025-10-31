@@ -1,3 +1,5 @@
+SLACK_WEBHOOK_URL = os.getenv("SLACK_WEBHOOK_URL")
+
 import time
 import re
 import os
