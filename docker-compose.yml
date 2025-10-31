@@ -44,7 +44,7 @@ services:
     volumes:
       - ./nginx/template/nginx.conf.template:/etc/nginx/nginx.conf:ro
       - ./nginx/entrypoint.sh:/docker-entrypoint.d/entrypoint.sh:ro
-      - nginx_logs:/var/log/nginx
+      - ./nginx_logs:/var/log/nginx
     environment:
       - ACTIVE_POOL=${ACTIVE_POOL}
       - RELEASE_ID_BLUE=${RELEASE_ID_BLUE}
