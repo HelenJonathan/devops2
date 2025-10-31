@@ -66,6 +66,12 @@ services:
       - ALERT_COOLDOWN_SEC=${ALERT_COOLDOWN_SEC}
     depends_on:
       - nginx
+    healthcheck:
+  test: ["CMD", "wget", "--spider", "-q", "http://localhost:3000/healthz"]
+  interval: 10s
+  timeout: 3s
+  retries: 3
+
 
 volumes:
   nginx_logs:
