@@ -12,7 +12,7 @@ services:
       - NODE_ENV=production
       - APP_POOL=blue
     healthcheck:
-      test: ["CMD", "curl", "-f", "http://localhost:3000/healthz"]
+      test: ["CMD", "wget", "--spider", "-q", "http://localhost:3000/healthz"]
       interval: 10s
       timeout: 3s
       retries: 3
@@ -28,7 +28,7 @@ services:
       - NODE_ENV=production
       - APP_POOL=green
     healthcheck:
-      test: ["CMD", "curl", "-f", "http://localhost:3000/healthz"]
+      test: ["CMD", "wget", "--spider", "-q", "http://localhost:3000/healthz"]
       interval: 10s
       timeout: 3s
       retries: 3
@@ -50,7 +50,7 @@ services:
       - RELEASE_ID_BLUE=${RELEASE_ID_BLUE}
       - RELEASE_ID_GREEN=${RELEASE_ID_GREEN}
     healthcheck:
-      test: ["CMD", "curl", "-f", "http://localhost/healthz"]
+      test: ["CMD", "wget", "--spider", "-q", "http://localhost/healthz"]
       interval: 10s
       timeout: 3s
       retries: 3
@@ -67,11 +67,10 @@ services:
     depends_on:
       - nginx
     healthcheck:
-  test: ["CMD", "wget", "--spider", "-q", "http://localhost:3000/healthz"]
-  interval: 10s
-  timeout: 3s
-  retries: 3
-
+      test: ["CMD", "wget", "--spider", "-q", "http://localhost:3000/healthz"]
+      interval: 10s
+      timeout: 3s
+      retries: 3
 
 volumes:
   nginx_logs:
