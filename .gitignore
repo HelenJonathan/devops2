@@ -1,2 +1,17 @@
+# Node/Python/General
+node_modules/
+venv/
+env/
+*.pyc
+__pycache__/
+.venv/
 .env
-.env
+
+
+# Docker
+docker-compose.override.yml
+*.log
+
+# OS
+.DS_Store
+thumbs.db
