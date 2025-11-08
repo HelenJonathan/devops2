@@ -5,7 +5,14 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="784a1f2a-357c-469b-9ec7-bc1b2b1d098d" name="Changes" comment="webhook-slack">
-      <change beforePath="$PROJECT_DIR$/.env.example" beforeDir="false" afterPath="$PROJECT_DIR$/.env.example" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/watcher/watcher.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.env.example" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.github/workflows/ci-cd.yml" beforeDir="false" afterPath="$PROJECT_DIR$/.github/workflows/ci-cd.yml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/docker-compose.yml" beforeDir="false" afterPath="$PROJECT_DIR$/docker-compose.yml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/nginx/entrypoint.sh" beforeDir="false" afterPath="$PROJECT_DIR$/nginx/entrypoint.sh" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/nginx/template/nginx.conf.template" beforeDir="false" afterPath="$PROJECT_DIR$/nginx/template/nginx.conf.template" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/watcher/ watcher.py" beforeDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -23,8 +30,8 @@
 }</component>
   <component name="GithubPullRequestsUISettings">{
   &quot;selectedUrlAndAccountId&quot;: {
-    &quot;url&quot;: &quot;https://github.com/HelenJonathan/devops2.git&quot;,
-    &quot;accountId&quot;: &quot;c8f3b42d-a562-4f2c-bb6a-7a4e05ebe644&quot;
+    &quot;url&quot;: &quot;https://github.com/HelenJonathan/devops2&quot;,
+    &quot;accountId&quot;: &quot;e378a3b7-4719-436e-815b-22285838719c&quot;
   }
 }</component>
   <component name="ProjectColorInfo">{
@@ -41,8 +48,9 @@
     "RunOnceActivity.ShowReadmeOnStart": "true",
     "RunOnceActivity.TerminalTabsStorage.copyFrom.TerminalArrangementManager.252": "true",
     "RunOnceActivity.git.unshallow": "true",
+    "SHELLCHECK.PATH": "I do mind",
     "com.intellij.ml.llm.matterhorn.ej.ui.settings.DefaultModelSelectionForGA.v1": "true",
-    "git-widget-placeholder": "main",
+    "git-widget-placeholder": "Merging main",
     "junie.onboarding.icon.badge.shown": "true",
     "last_opened_file_path": "C:/Users/PC/Desktop/devops2",
     "node.js.detected.package.eslint": "true",
@@ -69,7 +77,8 @@
       <option name="presentableId" value="Default" />
       <updated>1761808701493</updated>
       <workItem from="1761808705312" duration="8504000" />
-      <workItem from="1761857538588" duration="5383000" />
+      <workItem from="1761857538588" duration="7860000" />
+      <workItem from="1762627351917" duration="7980000" />
     </task>
     <task id="LOCAL-00001" summary="update">
       <option name="closed" value="true" />

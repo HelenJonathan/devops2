@@ -12,7 +12,7 @@ services:
       - NODE_ENV=production
       - APP_POOL=blue
     healthcheck:
-      test: ["CMD", "curl", "-f", "http://localhost:3000/healthz"]
+      test: ["CMD", "wget", "--spider", "-q", "http://localhost:3000/healthz"]
       interval: 10s
       timeout: 3s
       retries: 3
@@ -28,7 +28,7 @@ services:
       - NODE_ENV=production
       - APP_POOL=green
     healthcheck:
-      test: ["CMD", "curl", "-f", "http://localhost:3000/healthz"]
+      test: ["CMD", "wget", "--spider", "-q", "http://localhost:3000/healthz"]
       interval: 10s
       timeout: 3s
       retries: 3
@@ -42,30 +42,51 @@ services:
       - blue
       - green
     volumes:
-      - ./nginx/template/nginx.conf.template:/etc/nginx/nginx.conf:ro
-      - ./nginx/entrypoint.sh:/docker-entrypoint.d/entrypoint.sh:ro
+      - ./nginx/template/nginx.conf.template:/etc/nginx/nginx.conf.template:ro
       - nginx_logs:/var/log/nginx
     environment:
       - ACTIVE_POOL=${ACTIVE_POOL}
       - RELEASE_ID_BLUE=${RELEASE_ID_BLUE}
       - RELEASE_ID_GREEN=${RELEASE_ID_GREEN}
+    command: >
+      sh -c "
+        if [ \"$ACTIVE_POOL\" = 'blue' ]; then export PRIMARY=blue_app; export BACKUP=green_app;
+        else export PRIMARY=green_app; export BACKUP=blue_app; fi &&
+        envsubst '\$PRIMARY \$BACKUP \$RELEASE_ID_BLUE \$RELEASE_ID_GREEN' < /etc/nginx/nginx.conf.template > /etc/nginx/conf.d/default.conf &&
+        rm -f /var/log/nginx/access.log /var/log/nginx/error.log &&
+        touch /var/log/nginx/access.log /var/log/nginx/error.log &&
+        nginx -g 'daemon off;'
+      "
+
     healthcheck:
-      test: ["CMD", "curl", "-f", "http://localhost/healthz"]
+      test: ["CMD", "wget", "--spider", "-q", "http://localhost/healthz"]
       interval: 10s
       timeout: 3s
       retries: 3
 
   alert_watcher:
     build: ./watcher
+    container_name: alert_watcher
     volumes:
+      - ./watcher/watcher.py:/app/watcher.py
+      - ./watcher/requirements.txt:/app/requirements.txt
       - nginx_logs:/var/log/nginx
     environment:
-      - SLACK_WEBHOOK_URL=${SLACK_WEBHOOK_URL}
-      - ERROR_RATE_THRESHOLD=${ERROR_RATE_THRESHOLD}
-      - WINDOW_SIZE=${WINDOW_SIZE}
-      - ALERT_COOLDOWN_SEC=${ALERT_COOLDOWN_SEC}
+      - SLACK_WEBHOOK_URL=https://hooks.slack.com/services/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
+      - ERROR_RATE_THRESHOLD=${ERROR_RATE_THRESHOLD:-0.2}
+      - WINDOW_SIZE=${WINDOW_SIZE:-60}
+      - ALERT_COOLDOWN_SEC=${ALERT_COOLDOWN_SEC:-60}
+    command: >
+      sh -c "pip install -r requirements.txt &&
+             echo 'Starting watcher...' &&
+             python -u watcher.py"
     depends_on:
       - nginx
+    healthcheck:
+      test: ["CMD", "wget", "--spider", "-q", "http://localhost:3000/healthz"]
+      interval: 10s
+      timeout: 3s
+      retries: 3
 
 volumes:
   nginx_logs:
