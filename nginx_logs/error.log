@@ -1,0 +1,10 @@
+2025/11/08 20:35:31 [notice] 10#10: using the "epoll" event method
+2025/11/08 20:35:31 [notice] 10#10: nginx/1.25.5
+2025/11/08 20:35:31 [notice] 10#10: built by gcc 13.2.1 20231014 (Alpine 13.2.1_git20231014) 
+2025/11/08 20:35:31 [notice] 10#10: OS: Linux 6.6.87.2-microsoft-standard-WSL2
+2025/11/08 20:35:31 [notice] 10#10: getrlimit(RLIMIT_NOFILE): 1048576:1048576
+2025/11/08 20:35:31 [notice] 10#10: start worker processes
+2025/11/08 20:35:31 [notice] 10#10: start worker process 11
+2025/11/08 20:35:31 [notice] 10#10: start worker process 12
+2025/11/08 20:35:31 [notice] 10#10: start worker process 13
+2025/11/08 20:35:31 [notice] 10#10: start worker process 14

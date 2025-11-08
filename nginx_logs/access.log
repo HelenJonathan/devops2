@@ -1,0 +1,1 @@
+172.18.0.1 - - [08/Nov/2025:20:36:09 +0000] "GET / HTTP/1.1" 200 1247 "-" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/142.0.0.0 Safari/537.36" pool="blue" release="1.0.1" upstream_status="200" upstream="172.18.0.2:3000" request_time="0.011" upstream_response_time="0.010"
